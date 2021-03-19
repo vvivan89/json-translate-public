@@ -10,16 +10,16 @@ const translateURL = `https://translation.googleapis.com/language/translate/v2?k
 
 //all the translation work is done here
 export function Translator() {
-    //load glossary when tha page is loaded
+    //load glossary when the page is loaded
     const [glossary, setGlossary] = React.useState({loading:false, data:[]})
 
-    //JSON keys state: what eys there are,  to translate, etc...
+    //JSON keys state: what keys there are,  to translate, etc...
     const [displayKeys, setDisplayKeys] = React.useState(false)
     const [keys, setKeys] = React.useState([])
     const [translationStatus, setTranslationStatus] = React.useState(null)
     const [translationKeys, setTranslationKeys] = React.useState([])
     
-    // manages sthe state of modal window that allows for manual translation
+    // manages the state of modal window that allows for manual translation
     const [popupVisible, setPopupVisible] = React.useState(false)
     const [popupData, setPopupData] = React.useState({})
     
@@ -29,22 +29,22 @@ export function Translator() {
     const [targetLang, setTargetLang] = React.useState('ru')
     const [sourceLang, setSourceLang] = React.useState('en')
     
-    //input file name and data (used to create a new file to donwload)
+    //input file name and data (used to create a new file to download)
     const [file, setFile] = React.useState({})
 
     //state of translation or file reading error
     const [error, setError] = React.useState(false)
 
-    //name of the output file, usedto initiate its download
+    //name of the output file, used to initiate its download
     const [fileName, setFileName] = React.useState('')
 
-    //ref used to emulate user click on link to downliad file
+    //ref used to emulate user click on link to download file
     const aRef = React.useRef()
 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     React.useEffect(() => {
-        //when the name of the output fule is set, initiate its download
+        //when the name of the output file is set, initiate its download
         //by emulating the clicking 
         if (fileName) {
             aRef.current.click()
@@ -85,7 +85,7 @@ export function Translator() {
     }
 
     //upload the JSON file
-    //does not fire whe user has a file uploaded and tries to upload it again
+    //does not fire when user has a file uploaded and tries to upload it again
     const handleChange = e => {
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");
@@ -132,7 +132,7 @@ export function Translator() {
         //we need to show only unique ones, however, the quantity of items for these keys will be shown
         const resultArray = Array.from(new Set(keyArray))
         const result = resultArray.map(key => {
-            const count = keyArray.filter(item=>item===key).length //get then quntity of items with this key
+            const count = keyArray.filter(item=>item===key).length //get then quantity of items with this key
             return {
                 key,
                 count,
@@ -225,13 +225,13 @@ export function Translator() {
             .then(res => res.json())
             .then(res=>{
                 const translatedArray = res?.data?.translations
-                //trnslations are returned in an array
-                //if sonmething went wrond, there will be no array, but some error code instead
+                //translations are returned in an array
+                //if something went wrong, there will be no array, but some error code instead
                 if(Array.isArray(translatedArray)){
                     finalTranslatedArray.push(...translatedArray)
                 } else {
                     console.log(res)
-                    setError('Traslation error, try again')
+                    setError('Translation error, try again')
                 }
 
                 //if this is the last part, of the initial array,
@@ -239,7 +239,7 @@ export function Translator() {
                 if(ind===parts-1){
 
                     //trying to get source language of the text (used to write new strings to glossary)
-                    //first, get the detected language of aech translated string
+                    //first, get the detected language of each translated string
                     const detectedLangArray = finalTranslatedArray.map(item=>item.detectedSourceLanguage)
 
                     //then, get all unique detected languages and number of strings that are supposed to be in this language
@@ -259,7 +259,7 @@ export function Translator() {
                         setSourceLang(detectedLang[0].lang)
                     }
 
-                    //if there's something to output, assing translations to the original strings and check glossary
+                    //if there's something to output, assign translations to the original strings and check glossary
                     if(finalTranslatedArray.length){
                         setTranslationKeys(keyArray.map((item,i)=>{
                             //use the detected language or English (because it is the most used one in this app)
@@ -268,11 +268,11 @@ export function Translator() {
                             //find strings in glossary that match original string that needs to be translated
                             const glossaryCheck = glossary.data.filter(gl=>[gl.en, gl[lang]].includes(item.from))
 
-                            //keep %placehohlers% that tend to be translated wrong in some cases
+                            //keep %placeholders% that tend to be translated wrong in some cases
                             //if nothing is found in the glossary, this will be used
                             let to = replacements(finalTranslatedArray[i]?.translatedText)
 
-                            //if something found in glossary, replase Google translation with a glossary string
+                            //if something found in glossary, replace Google translation with a glossary string
                             let fromGlossary = false;
                             if(glossaryCheck.length && glossaryCheck[0][targetLang]){
                                 to=glossaryCheck[0][targetLang]
@@ -288,7 +288,7 @@ export function Translator() {
                         //if Google translation returned an error, we could still show the original strings for selected keys
                         setTranslationKeys(keyArray)
                     }
-                    //indicates that transaltion is done, unblocks the "Translate" button
+                    //indicates that translation is done, unblocks the "Translate" button
                     setTranslationStatus('done')
                 } else {
                     //if the translated part is not the last, call the translation of the next part
@@ -315,7 +315,7 @@ export function Translator() {
         ]
 
         //replace on number will throw an error
-        //TODO: actually, in this case fucntrion can just return the passed string
+        //TODO: actually, in this case function can just return the passed string
         let result = typeof string === 'number' ? string.toString() : string;
 
         //loop through all the replacement vars and find all inclusions (using "gi" regexp)
@@ -330,7 +330,7 @@ export function Translator() {
     //so this counter will give an idea of how much is used for each translations
     const charCount = translationKeys.map(item => typeof item.from ==='string' ? item.from : item.from.toString()).reduce((a, b) => a + b.length, 0)
     
-    //opens modal window to edit the transalation manually
+    //opens modal window to edit the translation manually
     const rowClick = (item, index) => {
         setPopupData({
             ...item,
@@ -391,17 +391,17 @@ export function Translator() {
                     value.forEach((item, index) => {
                         //translationKeys[i] is to check if there is next translation item or if we are done
                         if(translationKeys[i] && ['string','number'].includes(typeof item) && translationKeys[i].from === item ){
-                            //if translation for this string is found, update output with the tranlated string
-                            //numbers  in transaltion array are storea as strings and must be converted back to numbers
+                            //if translation for this string is found, update output with the translated string
+                            //numbers  in translation array are stored as strings and must be converted back to numbers
                             if(result[key] && result[key][index]){
                                 result[key][index] = typeof item==='number' ? Number(translationKeys[i].to) : translationKeys[i].to
                             }
                             //move to next translated string in the array
                             i++
                         } else {
-                            //if array item is not a srting/number, move to the next level of nesting
+                            //if array item is not a string/number, move to the next level of nesting
                             //for arrays, key is not passed to the recursion, previous level key must be used
-                            //if thre's already no key passed in this iteration, we are in the nested array and we pass the whole array to mutate
+                            //if there's already no key passed in this iteration, we are in the nested array and we pass the whole array to mutate
                             recurse('', item, key ? result[key][index] : result, index)
                         }
                     })
@@ -416,7 +416,7 @@ export function Translator() {
                     //if result is a string or an array, we could not mutate it
                     //this should not happen, but to avoid errors, "if" wrapper is used
                     if(result instanceof Object){
-                        //numbers  in transaltion array are storea as strings and must be converted back to numbers
+                        //numbers  in translation array are stored as strings and must be converted back to numbers
                         result[key] = typeof value==='number' ? Number(translationKeys[i].to) : translationKeys[i].to
                     }
                     //move to next translated string in the array
@@ -424,7 +424,7 @@ export function Translator() {
                 }
             }
 
-            //start recursion from the wtop level (whole file)
+            //start recursion from the top level (whole file)
             recurse('',output, output)
         }
 

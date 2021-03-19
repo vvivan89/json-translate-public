@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 
-//modal window that allows to manuallty translate strings
+//modal window that allows to manually translate strings
 export function Popup(props) {
     //don't show if not summoned
     if (!props.visible) { return null }

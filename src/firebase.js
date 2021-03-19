@@ -18,7 +18,7 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
-//using only two functions: cloud firestore to save glossary and uath to prevent paid usage of Translate API
+//using only two functions: cloud firestore to save glossary and auth to prevent paid usage of Translate API
 const db = firebase.firestore()
 const auth = firebase.auth()
 
@@ -56,7 +56,7 @@ const addToGlossary = async (from, to, glossary, targetLang, sourceLang) =>{
     }
 }
 
-//export finctions and Google Translate API key as well (which is the same as Firebase API key)
+//export functions and Google Translate API key as well (which is the same as Firebase API key)
 // eslint-disable-next-line
 export default {
     api:firebaseConfig.apiKey,

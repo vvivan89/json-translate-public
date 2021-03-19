@@ -12,7 +12,7 @@ export function Login({auth }) {
     const [error, setError] = React.useState(null)
 
     //form submit: display error if there is one
-    //in login sussessfull, state in <App/> will navigate to <Translator> component
+    //in login successful, state in <App/> will navigate to <Translator> component
     const signIn = (e) => {
         e.preventDefault()
         setError(false)
