@@ -1,0 +1,9 @@
+/* Make both links in the footer white and grey on hover */
+.hoverable-link {
+    color: white;
+    font-size: 12px
+}
+
+.hoverable-link:hover {
+    color: lightgrey
+}

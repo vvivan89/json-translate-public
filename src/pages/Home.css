@@ -1,0 +1,155 @@
+/* formatting of the dropzone with hover effect */
+.dropZone {
+    height:300px;
+    max-height: 50vh;
+    border-radius: 20px;
+    border: 3px solid #007bff9e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff9e;
+}
+
+.dropZone>div{
+    width: 100%;
+    text-align: center;
+}
+
+/* Becomes brighter on hover */
+.dropZone:hover {
+    cursor: pointer;
+    color: #007bff;
+    border-color: #007bff;
+}
+
+/* formatting of an error message in translation screen  */
+  .errorContainer {
+      border-radius: 5px;
+      border: 2px solid darkred;
+      color: darkred;
+      font-weight: bold;
+      text-align: center;
+      font-size: 20px;
+      margin: 20px 0;
+      padding: 10px
+  }
+
+.translationError {
+    color: red;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+/* margins of the row with "translate" and "download" button */
+.translationMenu {
+    margin: 10px 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* style <Row> element */
+.translationMenu>div {
+    text-align: center;
+}
+
+/* overrides the default Bootstrap margins for <Col> element */
+.translationMenu>div>div {
+    margin-top: 5px;
+    margin-bottom:5px;
+}
+
+/* Make button that removes uploaded file look like a link */
+.hoverableCloseButton {
+    color: #007bff9e;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.hoverableCloseButton:hover {
+    cursor: pointer;
+    color: #007bff;
+}
+
+/* Row of buttons (4 of them) in the modal window */
+.modalButtons {
+    width: 100%;
+    text-align: right;
+}
+
+/* overrides the default Bootstrap margins for <Button> element */
+.modalButtons>button{
+    margin: 0 5px;
+}
+
+/* header of the "keys" section, that allows to show or hide JSON keys from uploaded file */
+.hoverableAccordion {
+    font-weight: bold;
+    text-align: center;
+}
+.hoverableAccordion:hover, .hoverable:hover {
+    cursor: pointer;
+}
+
+/* style to display text that is translated manually */
+.manual {
+    color: darkblue;
+    font-weight: bold;
+  }
+  
+/* style to display text that is translated from firestore database */
+.glossary {
+    color: darkgreen;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* "table" (actually formatted by divs) interaction with user */
+.keyTableRow{
+    border-bottom: 1px solid lightgrey;
+}
+
+.keyTableRow:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+}
+
+/* Header of the "table" has same classes as all rows, but also should not be hoverable */
+.tableHeader {
+    border-bottom-width: 2px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.tableHeader:hover {
+    cursor:initial;
+    background-color: initial;
+}
+
+/* Orignal text formatting in the resulting table: adds border on narrow screens */
+.cellFrom {
+    font-style: italic;
+    border-bottom: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .cellFrom {
+        border-bottom: 1px dashed lightpink;
+    }
+}
+
+/* Styles for popup window where user translates text manually */
+
+
+/* small text below the translation window */
+.source {
+    margin-bottom: 15px;
+    font-size: 11px;
+    font-style: italic;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+.margin-row {
+    margin: 10px 0;
+}

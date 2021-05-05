@@ -1,0 +1,27 @@
+/* 
+	Makes an effect that header is elevated over the rest content 
+	Applied with JS only when page is scrolled 200px down
+*/
+.elevate {
+	box-shadow: 0 4px 18px 0px rgba(0, 0, 0, 0.12),
+		0 7px 10px -5px rgba(0, 0, 0, 0.15);
+	background-color: #fff;
+	color: #555;
+}
+
+/* 
+	Overrides Bootstrap styles for InputGroup 
+	to center Google API text input vertically
+*/
+#googleApiInput {
+	margin-bottom: 5px !important;
+}
+
+/* 
+	Overrides Bootstrap styles for InputGroup 
+	to get equal margins for all input in the header
+*/
+.input-100 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
